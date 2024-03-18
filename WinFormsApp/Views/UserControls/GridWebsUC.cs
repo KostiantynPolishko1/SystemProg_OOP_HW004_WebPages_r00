@@ -19,6 +19,7 @@ namespace WinFormsApp.Views.UserControls
         private List<Button> menuBtns;
         private readonly string[] nameBtns;
         private AddWebUC addWebUC;
+        private PsiSet psiSet;
 
         public GridWebsUC()
         {
@@ -39,14 +40,15 @@ namespace WinFormsApp.Views.UserControls
 
                 startPosLeft -= 50;
             }
-
-            addWebUC = new AddWebUC() { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
-            this.Controls.Add(addWebUC);
         }
 
-        public GridWebsUC(in WebController webController) : this()
+        public GridWebsUC(in WebController webController, ref PsiSet psiSet) : this()
         {
             this.webController = webController;
+            this.psiSet = psiSet;
+
+            addWebUC = new AddWebUC(ref this.psiSet, ref this.webController) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+            this.Controls.Add(addWebUC);
 
             Reload();
         }

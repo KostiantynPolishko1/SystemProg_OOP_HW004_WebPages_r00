@@ -20,8 +20,7 @@ namespace WinFormsApp.Views.UserControls
         private AddWebUC addWebUC;
         public WebUC()
         {
-            InitializeComponent();
-            psiSet = new PsiSet();
+            InitializeComponent();           
         }
 
         public WebUC(int id, in string name, in string href, ref WebController webController) : this()
@@ -113,7 +112,6 @@ namespace WinFormsApp.Views.UserControls
             {
                 webController.AddWebToDb(wt);
 
-                //webController.webtracks.Add(wt);
                 webController.SaveChanges();
             }
         }

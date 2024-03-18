@@ -9,6 +9,7 @@ namespace WinFormsApp
         private readonly string[] nameBtns;
         private List<Button> menuBtns;
         private WebController db;
+        private PsiSet psiSet;
 
         public MainForm()
         {
@@ -50,6 +51,8 @@ namespace WinFormsApp
             db = new WebController() { };
             dbIsConnection();
 
+            psiSet = new PsiSet();
+
             menuBtns[0].BackColor = Color.DarkGreen;
             menuBtns[0].ForeColor = Color.White;
 
@@ -78,7 +81,7 @@ namespace WinFormsApp
             menuBtns[0].Enabled = false;
             menuBtns[2].Enabled = false;
 
-            this.Controls.Add(new GridWebsUC(db) { Location = new Point(LbSqlCon.Left, menuBtns[0].Top + menuBtns[0].Height + 10) });
+            this.Controls.Add(new GridWebsUC(db, ref psiSet) { Location = new Point(LbSqlCon.Left, menuBtns[0].Top + menuBtns[0].Height + 10) });
         }
     }
 }
