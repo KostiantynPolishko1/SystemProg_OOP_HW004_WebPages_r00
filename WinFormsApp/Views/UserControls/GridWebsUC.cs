@@ -18,6 +18,8 @@ namespace WinFormsApp.Views.UserControls
         private WebController webController;
         private List<Button> menuBtns;
         private readonly string[] nameBtns;
+        private AddWebUC addWebUC;
+
         public GridWebsUC()
         {
             InitializeComponent();
@@ -37,6 +39,9 @@ namespace WinFormsApp.Views.UserControls
 
                 startPosLeft -= 50;
             }
+
+            addWebUC = new AddWebUC() { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+            this.Controls.Add(addWebUC);
         }
 
         public GridWebsUC(in WebController webController) : this()
@@ -87,7 +92,7 @@ namespace WinFormsApp.Views.UserControls
                 offsetXY(ref X, ref Y);
             }
 
-            this.PnWeb.Controls.Add(new WebUC(webShortcuts.Count + 1, "New", "href", ref webController) { Location = new Point(X, Y) });
+            this.PnWeb.Controls.Add(new WebUC(webShortcuts.Count + 1, "New", "href", ref webController, ref addWebUC) { Location = new Point(X, Y) });
 
             void offsetXY(ref int X, ref int Y)
             {

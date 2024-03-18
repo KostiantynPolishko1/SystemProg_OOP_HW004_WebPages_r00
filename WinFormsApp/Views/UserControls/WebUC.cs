@@ -17,6 +17,7 @@ namespace WinFormsApp.Views.UserControls
     {
         private PsiSet psiSet;
         private WebController webController;
+        private AddWebUC addWebUC;
         public WebUC()
         {
             InitializeComponent();
@@ -27,39 +28,50 @@ namespace WinFormsApp.Views.UserControls
         {
             this.webController = webController;
 
-            this.Name = (name != "New" ? $"WebUC_{id}" : $"{name}WebUC_{id}");
+            this.Name = $"WebUC_{id}";
             LbId.Text = id.ToString();
             LbName.Text = name;
             LbHref.Text = href;
 
-            WebUC_Events(name);
+            WebUC_Events();
         }
 
-        private void WebUC_Events(in string name)
+        public WebUC(int id, in string name, in string href, ref WebController webController, ref AddWebUC addWebUC) : this()
         {
-            if (name != "New")
-            {
-                PnWeb.BackgroundImage = Properties.Resources.GoogleChromeLogo;
-                PnWeb.MouseClick += PnWeb_MouseClick;
-                PnWeb.MouseLeave += PnWeb_MouseLeave;
-                PnWeb.MouseHover += PnWeb_MouseHover;
-            }
-            else
-            {
-                PnWeb.BackgroundImage = Properties.Resources.newtab;
-                PnWeb.MouseClick += NewWebUC_MouseClick;
-                PnWeb.MouseLeave += NewWebUC_MouseLeave;
-                PnWeb.MouseHover += NewWebUC_MouseHover;
+            this.webController = webController;
+            this.addWebUC = addWebUC;
 
-                this.cBxSelect.Visible = false;
-                this.cBxSelect.Enabled = false;
-                this.LbHref.Visible = true;
-            }
+            this.Name = $"{name}WebUC_{id}";
+            LbId.Text = id.ToString();
+            LbName.Text = name;
+            LbHref.Text = href;
+
+            NewWebUC_Events();
+        }
+
+        private void WebUC_Events()
+        {
+            PnWeb.BackgroundImage = Properties.Resources.GoogleChromeLogo;
+            PnWeb.MouseClick += PnWeb_MouseClick;
+            PnWeb.MouseLeave += PnWeb_MouseLeave;
+            PnWeb.MouseHover += PnWeb_MouseHover;
+        }
+
+        private void NewWebUC_Events()
+        {
+            PnWeb.BackgroundImage = Properties.Resources.newtab;
+            PnWeb.MouseClick += NewWebUC_MouseClick;
+            PnWeb.MouseLeave += NewWebUC_MouseLeave;
+            PnWeb.MouseHover += NewWebUC_MouseHover;
+
+            this.cBxSelect.Visible = false;
+            this.cBxSelect.Enabled = false;
+            this.LbHref.Visible = true;
         }
 
         private void NewWebUC_MouseClick(object sender, MouseEventArgs e)
         {
-
+            addWebUC.Visible = true;
         }
 
         private void NewWebUC_MouseHover(object sender, EventArgs e)
