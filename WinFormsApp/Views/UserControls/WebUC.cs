@@ -15,24 +15,61 @@ namespace WinFormsApp.Views.UserControls
 {
     public partial class WebUC : UserControl
     {
-        //private List<Process> processes;
         private PsiSet psiSet;
         private WebController webController;
         public WebUC()
         {
             InitializeComponent();
-            //processes = new List<Process>(3);
             psiSet = new PsiSet();
         }
 
         public WebUC(int id, in string name, in string href, ref WebController webController) : this()
         {
-            this.Name = $"WebUC_{id}";
+            this.webController = webController;
+
+            this.Name = (name != "New" ? $"WebUC_{id}" : $"{name}WebUC_{id}");
             LbId.Text = id.ToString();
             LbName.Text = name;
             LbHref.Text = href;
 
-            this.webController = webController;
+            WebUC_Events(name);
+        }
+
+        private void WebUC_Events(in string name)
+        {
+            if (name != "New")
+            {
+                PnWeb.BackgroundImage = Properties.Resources.GoogleChromeLogo;
+                PnWeb.MouseClick += PnWeb_MouseClick;
+                PnWeb.MouseLeave += PnWeb_MouseLeave;
+                PnWeb.MouseHover += PnWeb_MouseHover;
+            }
+            else
+            {
+                PnWeb.BackgroundImage = Properties.Resources.newtab;
+                PnWeb.MouseClick += NewWebUC_MouseClick;
+                PnWeb.MouseLeave += NewWebUC_MouseLeave;
+                PnWeb.MouseHover += NewWebUC_MouseHover;
+
+                this.cBxSelect.Visible = false;
+                this.cBxSelect.Enabled = false;
+                this.LbHref.Visible = true;
+            }
+        }
+
+        private void NewWebUC_MouseClick(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void NewWebUC_MouseHover(object sender, EventArgs e)
+        {
+            this.BackColor = Color.FromArgb(249, 255, 64);
+        }
+
+        private void NewWebUC_MouseLeave(object sender, EventArgs e)
+        {
+            this.BackColor = Color.FromArgb(224, 224, 224);
         }
 
         private void PnWeb_MouseHover(object sender, EventArgs e)
@@ -62,9 +99,9 @@ namespace WinFormsApp.Views.UserControls
 
             if (!flag)
             {
-                //webController.AddWebToDb(wt);
+                webController.AddWebToDb(wt);
 
-                webController.webtracks.Add(wt);
+                //webController.webtracks.Add(wt);
                 webController.SaveChanges();
             }
         }

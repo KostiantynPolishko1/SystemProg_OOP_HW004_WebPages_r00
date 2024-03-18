@@ -58,15 +58,11 @@ namespace WinFormsApp.Views.UserControls
             // 
             // PnWeb
             // 
-            PnWeb.BackgroundImage = Properties.Resources.GoogleChromeLogo;
             PnWeb.BackgroundImageLayout = ImageLayout.Zoom;
             PnWeb.Location = new Point(0, 25);
             PnWeb.Name = "PnWeb";
             PnWeb.Size = new Size(150, 100);
             PnWeb.TabIndex = 2;
-            PnWeb.MouseClick += PnWeb_MouseClick;
-            PnWeb.MouseLeave += PnWeb_MouseLeave;
-            PnWeb.MouseHover += PnWeb_MouseHover;
             // 
             // LbId
             // 

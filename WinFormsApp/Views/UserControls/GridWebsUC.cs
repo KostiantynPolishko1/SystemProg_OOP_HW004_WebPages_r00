@@ -69,16 +69,14 @@ namespace WinFormsApp.Views.UserControls
         private void Reload()
         {
             int X = 5, Y = 5, space = 5;
-            int i = 0;
+            int i = 1;
 
-/*            string msg = webController.GetAllWebShortcuts(out List<webshortcut>? webShortcuts);
+            string msg = webController.GetAllWebShortcuts(out List<webshortcut>? webShortcuts);
             if (msg != string.Empty)
             {
                 MessageBox.Show(msg);
                 return;
-            }*/
-
-            List<webshortcut> webShortcuts = webController.webshortcuts.ToList();
+            }
 
             int offsetX = new WebUC().Width + space;
             int offsetY = new WebUC().Height + space;
@@ -86,14 +84,21 @@ namespace WinFormsApp.Views.UserControls
             foreach(webshortcut web in webShortcuts)
             {
                 this.PnWeb.Controls.Add(new WebUC(web.id, web.name, web.href, ref webController) { Location = new Point(X, Y)});
-                X += offsetX;
+                offsetXY(ref X, ref Y);
+            }
 
-                i += 1;
-                if (i % 3 == 0)
+            this.PnWeb.Controls.Add(new WebUC(webShortcuts.Count + 1, "New", "href", ref webController) { Location = new Point(X, Y) });
+
+            void offsetXY(ref int X, ref int Y)
+            {
+                X += offsetX;
+               
+                if (i % 4 == 0)
                 {
                     Y += offsetY;
                     X = 5;
                 }
+                i += 1;
             }
         }
     }
