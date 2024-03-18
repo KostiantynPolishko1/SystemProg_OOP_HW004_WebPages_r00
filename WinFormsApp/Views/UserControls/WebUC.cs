@@ -55,17 +55,17 @@ namespace WinFormsApp.Views.UserControls
                 return;
             }
 
-            if (int.TryParse(this.LbId.Text, out int i))
+            this.LbWebState.Text = "open";
+            this.LbWebState.Visible = true;
+
+            (bool flag, webtrack? wt) = WebController.getWebTrack(prc);
+
+            if (!flag)
             {
-                (bool flag, webtrack? wt) = WebController.getWebTrack(prc);
+                //webController.AddWebToDb(wt);
 
-                if (!flag)
-                {
-                    //webController.AddWebToDb(wt);
-
-                    webController.webtracks.Add(wt);
-                    webController.SaveChanges();
-                }
+                webController.webtracks.Add(wt);
+                webController.SaveChanges();
             }
         }
     }

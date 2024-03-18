@@ -165,17 +165,20 @@ namespace ConsoleApp.Controllers
             {
                 foreach (DictionaryEntry de in prs.StartInfo.EnvironmentVariables)
                 {
-                    if (de.Key.ToString() == "COMPUTERNAME") 
-                    { 
-                        cname = de.Value.ToString(); 
+                    if (de.Key.ToString() == "COMPUTERNAME")
+                    {
+                        cname = de.Value.ToString();
                     }
-                    else if (de.Key.ToString() == "USERNAME") 
-                    { 
-                        uname = de.Value.ToString(); 
+                    else if (de.Key.ToString() == "USERNAME")
+                    {
+                        uname = de.Value.ToString();
                     }
 
-                    if(cname != null && uname != null) { break; }
+                    if (cname != null && uname != null) { break; }
                 }
+
+                //cname = Environment.GetEnvironmentVariable("COMPUTERNAME");
+                //uname = Environment.GetEnvironmentVariable("USERNAME");
 
                 owner = $"{cname ??= "unknown"} | {uname ??= "-"}";
                 return false;
