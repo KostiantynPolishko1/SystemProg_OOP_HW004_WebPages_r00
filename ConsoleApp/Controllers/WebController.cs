@@ -63,6 +63,18 @@ namespace ConsoleApp.Controllers
             }
         }
 
+        public void AddWebShortcutToDb(in webshortcut wst)
+        {
+            this.webshortcuts.Add(wst);
+            (bool flag, string msg) = this.isSaveChanges();
+
+            if (!flag)
+            {
+                Console.WriteLine(msg);
+                //or write msg to logfile
+            }
+        }
+
         public static void writeInfo(in List<webshortcut> items)
         {
             foreach (webshortcut item in items)
@@ -77,6 +89,18 @@ namespace ConsoleApp.Controllers
             {
                 Console.WriteLine($"\tAttention!\n\t{item}");
             }
+        }
+
+        public static (bool, webshortcut?) getWebShortCut(in Process prs)
+        {
+            webshortcut? wst = null;
+            if (prs == null) { return (true, wst); }
+
+            if (getUrl(prs, out string url)) { return (true, wst); }
+
+            if (getWebName(prs, out string webname)) { return (true, wst); }
+
+            return (false, new webshortcut(url, webname));
         }
 
         public static (bool, webtrack?) getWebTrack(in Process prs)
@@ -137,6 +161,26 @@ namespace ConsoleApp.Controllers
             catch
             {
                 url = string.Empty;
+                return true;
+            }
+        }
+
+        private static bool getWebName(in Process prs, out string webname)
+        {
+            try
+            {
+                if (findUrl(prs.StartInfo.ArgumentList.ToList(), out string urlname))
+                {
+                    webname = urlname.Substring(urlname.IndexOf(":") + 3, (urlname.IndexOf(".") - urlname.IndexOf(":") - 3));
+                    return false;
+                }
+
+                webname = string.Empty;
+                return true;
+            }
+            catch
+            {
+                webname = string.Empty;
                 return true;
             }
         }

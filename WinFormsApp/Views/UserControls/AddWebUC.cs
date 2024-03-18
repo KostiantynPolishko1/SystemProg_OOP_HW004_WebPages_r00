@@ -69,19 +69,28 @@ namespace WinFormsApp.Views.UserControls
 
         private void BtnSave_MouseClick(object sender, MouseEventArgs e)
         {
+            (bool flag, webshortcut? wst) = WebController.getWebShortCut(process);
+
+            if (!flag)
+            {
+                webController.AddWebShortcutToDb(wst);
+            }
             
+            WebUCNotEnanble();
         }
 
         private void BtnClose_MouseClick(object sender, MouseEventArgs e)
         {
-            
+            WebUCNotEnanble();
         }
 
-        private void HideAddWebUC()
+        private void WebUCNotEnanble()
         {
             tBxEnter.Text = tbxfill;
             BtnSave.Enabled = false;
             BtnClose.Enabled = false;
+            process = null;
+            this.Visible = false;
         }
 
         private void BtnEnable()

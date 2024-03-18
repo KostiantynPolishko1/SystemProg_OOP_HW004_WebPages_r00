@@ -111,8 +111,6 @@ namespace WinFormsApp.Views.UserControls
             if (!flag)
             {
                 webController.AddWebToDb(wt);
-
-                webController.SaveChanges();
             }
         }
     }
