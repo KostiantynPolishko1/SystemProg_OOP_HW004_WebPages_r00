@@ -21,6 +21,7 @@ namespace WinFormsApp.Views.UserControls
         private PsiSet psiSet;
         private Process? process;
         private WebController webController;
+        private Button BtnUpdate;
 
         public AddWebUC()
         {
@@ -31,10 +32,13 @@ namespace WinFormsApp.Views.UserControls
             BtnClose.Enabled = false;
         }
 
-        public AddWebUC(ref PsiSet psiSet, ref WebController webController) : this() 
+        public AddWebUC(ref PsiSet psiSet, ref WebController webController, in Button BtnUpdate) : this() 
         {
             this.psiSet = psiSet;
             this.webController = webController;
+            this.BtnUpdate = BtnUpdate;
+
+            //BtnSave.DataBindings.Add(new Binding("Text", BtnUpdate, "Name"));
         }
 
         private void tBxEnter_Enter(object sender, EventArgs e)

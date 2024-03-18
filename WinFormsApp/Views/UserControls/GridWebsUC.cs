@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -47,9 +48,15 @@ namespace WinFormsApp.Views.UserControls
             this.webController = webController;
             this.psiSet = psiSet;
 
-            addWebUC = new AddWebUC(ref this.psiSet, ref this.webController) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+            addWebUC = new AddWebUC(ref this.psiSet, ref this.webController, menuBtns[0]) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
             this.Controls.Add(addWebUC);
 
+            Reload();
+        }
+
+        private void BtnUpdate_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.PnWeb.Controls.Clear();
             Reload();
         }
 
@@ -58,9 +65,12 @@ namespace WinFormsApp.Views.UserControls
             btn.UseVisualStyleBackColor = true;
             btn.BackgroundImageLayout = ImageLayout.Zoom;
 
-            if (btn.Name == $"Btn{nameBtns[0]}") { btn.BackgroundImage = WinFormsApp.Properties.Resources.refresh; }
-            else if (btn.Name == $"Btn{nameBtns[1]}") { btn.BackgroundImage = WinFormsApp.Properties.Resources.clear; }
-            else if (btn.Name == $"Btn{nameBtns[2]}") { btn.BackgroundImage = WinFormsApp.Properties.Resources.search; }
+            if (btn.Name == $"Btn{nameBtns[0]}") { 
+                btn.BackgroundImage = Properties.Resources.refresh;
+                btn.MouseClick += BtnUpdate_MouseClick;
+            }
+            else if (btn.Name == $"Btn{nameBtns[1]}") { btn.BackgroundImage = Properties.Resources.clear; }
+            else if (btn.Name == $"Btn{nameBtns[2]}") { btn.BackgroundImage = Properties.Resources.search; }
         }
 
         private void CreateObj(in Control control, in Point point, string name, string Text = "")
