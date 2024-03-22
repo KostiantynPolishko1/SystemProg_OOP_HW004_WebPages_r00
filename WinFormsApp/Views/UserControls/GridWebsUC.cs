@@ -21,12 +21,13 @@ namespace WinFormsApp.Views.UserControls
         private readonly string[] nameBtns;
         private AddWebUC addWebUC;
         private PsiSet psiSet;
+        private SetForm setForm;
 
         public GridWebsUC()
         {
             InitializeComponent();
 
-            nameBtns = new string[] { "Update", "Clear", "Search" };
+            nameBtns = new string[] { "Update", "Clear", "Search"};
             menuBtns = new List<Button>(nameBtns.Length);
 
             int startPosLeft = 570;

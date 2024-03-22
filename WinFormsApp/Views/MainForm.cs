@@ -15,7 +15,7 @@ namespace WinFormsApp
         {
             InitializeComponent();
 
-            nameBtns = new string[] { "Default", "Custom", "Load" };
+            nameBtns = new string[] { "Default", "Custom", "Load", "Setting"};
             menuBtns = new List<Button>(nameBtns.Length);
 
             for(int i = 0; i < nameBtns.Length; i++) { menuBtns.Add(new Button()); }
