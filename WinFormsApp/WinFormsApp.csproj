@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ConsoleApp\ConsoleApp.csproj" />
+    <ProjectReference Include="..\WinFormsSetting\WinFormsSetting.csproj" />
   </ItemGroup>
 
   <ItemGroup>

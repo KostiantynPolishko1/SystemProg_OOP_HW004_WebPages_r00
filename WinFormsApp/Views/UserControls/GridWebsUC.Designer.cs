@@ -50,7 +50,7 @@ namespace WinFormsApp.Views.UserControls
             BackColor = Color.FromArgb(147, 153, 250);
             Controls.Add(PnWeb);
             Name = "GridWebsUC";
-            Size = new Size(700, 700);
+            Size = new Size(620, 700);
             ResumeLayout(false);
         }
 

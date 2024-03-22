@@ -46,7 +46,7 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(700, 760);
+            ClientSize = new Size(640, 760);
             Controls.Add(LbSqlCon);
             Name = "MainForm";
             Text = "WebPages";
@@ -56,7 +56,6 @@
         }
 
         private Label LbSqlCon;
-
         #endregion
     }
 }

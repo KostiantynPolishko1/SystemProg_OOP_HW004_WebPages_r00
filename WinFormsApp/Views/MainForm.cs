@@ -14,6 +14,7 @@ namespace WinFormsApp
         public MainForm()
         {
             InitializeComponent();
+            InitializeComponent2();
 
             nameBtns = new string[] { "Default", "Custom", "Load", "Setting"};
             menuBtns = new List<Button>(nameBtns.Length);
