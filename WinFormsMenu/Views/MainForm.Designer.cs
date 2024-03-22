@@ -66,19 +66,21 @@
             // 
             mnDefault.DropDownItems.AddRange(new ToolStripItem[] { mnLoad });
             mnDefault.Name = "mnDefault";
-            mnDefault.Size = new Size(142, 26);
+            mnDefault.Size = new Size(224, 26);
             mnDefault.Text = "Default";
+            mnDefault.CheckedChanged += mnDefault_CheckedChanged;
             // 
             // mnLoad
             // 
             mnLoad.Name = "mnLoad";
-            mnLoad.Size = new Size(125, 26);
+            mnLoad.Size = new Size(224, 26);
             mnLoad.Text = "Load";
+            mnLoad.CheckedChanged += mnLoad_CheckedChanged;
             // 
             // mnCustom
             // 
             mnCustom.Name = "mnCustom";
-            mnCustom.Size = new Size(142, 26);
+            mnCustom.Size = new Size(224, 26);
             mnCustom.Text = "Custom";
             // 
             // mnSetting
@@ -91,26 +93,26 @@
             // mnAutoRun
             // 
             mnAutoRun.Name = "mnAutoRun";
-            mnAutoRun.Size = new Size(224, 26);
+            mnAutoRun.Size = new Size(163, 26);
             mnAutoRun.Text = "AutoRun";
             // 
             // mnDark
             // 
             mnDark.Name = "mnDark";
-            mnDark.Size = new Size(224, 26);
+            mnDark.Size = new Size(163, 26);
             mnDark.Text = "Dark";
             // 
             // mnFullScreen
             // 
             mnFullScreen.Name = "mnFullScreen";
-            mnFullScreen.Size = new Size(224, 26);
+            mnFullScreen.Size = new Size(163, 26);
             mnFullScreen.Text = "Full Screen";
             // 
             // mnLanguages
             // 
             mnLanguages.DropDownItems.AddRange(new ToolStripItem[] { mncmLanguage });
             mnLanguages.Name = "mnLanguages";
-            mnLanguages.Size = new Size(224, 26);
+            mnLanguages.Size = new Size(163, 26);
             mnLanguages.Text = "Languages";
             // 
             // mncmLanguage
@@ -129,13 +131,12 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(640, 760);
+            ClientSize = new Size(645, 760);
             Controls.Add(mnMain);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = mnMain;
             Name = "MainForm";
             Text = "WebPages";
-            Load += MainForm_Load;
             mnMain.ResumeLayout(false);
             mnMain.PerformLayout();
             ResumeLayout(false);

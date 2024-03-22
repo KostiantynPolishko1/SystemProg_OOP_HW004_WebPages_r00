@@ -6,8 +6,6 @@ namespace WinFormsApp
 {
     public partial class MainForm : Form
     {
-        //private readonly string[] nameBtns;
-        //private List<Button> menuBtns;
         private WebController db;
         private PsiSet psiSet;
 
@@ -16,13 +14,10 @@ namespace WinFormsApp
             InitializeComponent();
             languages = new List<string>() { "English", "Italian", "Russian" };
 
-            //nameBtns = new string[] { "Default", "Custom", "Load" };
-            //menuBtns = new List<Button>(nameBtns.Length);
-
             setMenuClick(mnDefault, mnCustom, mnLoad);
             mncmLanguage.Items.AddRange(languages.ToArray());
-
-            //for (int i = 0; i < nameBtns.Length; i++) { menuBtns.Add(new Button()); }
+            mnCustom.Enabled = false;
+            mnLoad.Visible = false;
         }
 
         private void setMenuClick(params ToolStripMenuItem[] items)
@@ -34,50 +29,15 @@ namespace WinFormsApp
             }
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            //CreateObj(menuBtns[0], new Point(LbSqlCon.Left + LbSqlCon.Width + 10, LbSqlCon.Top), $"Btn{nameBtns[0]}", nameBtns[0]);
-            //CreateObj(menuBtns[1], new Point(menuBtns[0].Left + menuBtns[0].Width + 10, LbSqlCon.Top), $"Btn{nameBtns[1]}", nameBtns[1]);
-
-            //menuBtns[0].MouseClick += BtnDefault_MouseClick;
-        }
-
-        /*        private void CreateObj(in Control control, in Point point, string Name, string Text)
-                {
-                    control.Name = Name;
-                    control.Text = Text;
-                    control.Size = new Size(100, 30);
-                    control.Location = point;
-                    control.TabIndex = 1;
-
-                    if (control is Button)
-                    {
-                        control.BackColor = Color.White;
-                        control.ForeColor = Color.Black;
-                    }
-
-                    this.Controls.Add(control);
-                }*/
-
-        private void BtnDefault_MouseClick(object sender, MouseEventArgs e)
+        private void mnDefault_CheckedChanged(object sender, EventArgs e)
         {
             db = new WebController() { };
             dbIsConnection();
 
+            mnDefault.CheckOnClick = false;
+            mnLoad.Visible = true;
+
             psiSet = new PsiSet();
-
-            /*            menuBtns[0].BackColor = Color.DarkGreen;
-                        menuBtns[0].ForeColor = Color.White;
-
-                        menuBtns[1].BackColor = Color.Gray;
-                        menuBtns[1].Enabled = false;
-                        menuBtns[1].Visible = false;
-
-                        CreateObj(menuBtns[2], new Point(menuBtns[0].Left + menuBtns[0].Width + 10, LbSqlCon.Top), $"{nameBtns[2]}Btn", nameBtns[2]);
-                        menuBtns[2].BackColor = Color.Blue;
-                        menuBtns[2].ForeColor = Color.White;
-                        menuBtns[2].MouseClick += BtnLoad_MouseClick;*/
-
         }
 
         private void dbIsConnection()
@@ -89,12 +49,10 @@ namespace WinFormsApp
             }
         }
 
-        private void BtnLoad_MouseClick(object sender, MouseEventArgs e)
+        private void mnLoad_CheckedChanged(object sender, EventArgs e)
         {
-            /*            menuBtns[0].Enabled = false;
-                        menuBtns[2].Enabled = false;*/
-
-            this.Controls.Add(new GridWebsUC(db, ref psiSet) { Location = new Point(10, 10) });
+            this.Controls.Add(new GridWebsUC(db, ref psiSet) { Location = new Point(10, 35) });
+            mnConnection.Enabled = false;
         }
     }
 }
