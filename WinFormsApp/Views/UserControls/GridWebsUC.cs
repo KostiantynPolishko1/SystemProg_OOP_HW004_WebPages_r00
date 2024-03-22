@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormsApp.Controllers;
+using WinFormsApp.Models;
 
 namespace WinFormsApp.Views.UserControls
 {
@@ -21,6 +23,8 @@ namespace WinFormsApp.Views.UserControls
         private readonly string[] nameBtns;
         private AddWebUC addWebUC;
         private PsiSet psiSet;
+        private ControllerRegedit crRegedit;
+        private Names languge;
 
         public GridWebsUC()
         {
@@ -43,16 +47,35 @@ namespace WinFormsApp.Views.UserControls
             }
         }
 
-        public GridWebsUC(in WebController webController, ref PsiSet psiSet) : this()
+        public GridWebsUC(in WebController webController, ref PsiSet psiSet, ref ControllerRegedit crRegedit) : this()
         {
             this.webController = webController;
             this.psiSet = psiSet;
+            this.crRegedit = crRegedit;
 
-            addWebUC = new AddWebUC(ref this.psiSet, ref this.webController, menuBtns[0]) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+            //addWebUC = new AddWebUC(ref this.psiSet, ref this.webController, menuBtns[0]) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+            createAddWebUc(crRegedit.language);
             this.Controls.Add(addWebUC);
 
             Reload();
         }
+
+        private void createAddWebUc(in string language)
+        {
+            switch (language)
+            {
+                case "Italian":
+                    addWebUC = new AddWebUC(ref this.psiSet, ref this.webController, menuBtns[0], new NamesIt()) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+                    break;
+                case "Russian":
+                    addWebUC = new AddWebUC(ref this.psiSet, ref this.webController, menuBtns[0], new NamesRu()) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+                    break;
+                default:
+                    addWebUC = new AddWebUC(ref this.psiSet, ref this.webController, menuBtns[0], new NamesEn()) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+                    break;
+            }
+        }
+
 
         private void BtnUpdate_MouseClick(object sender, MouseEventArgs e)
         {

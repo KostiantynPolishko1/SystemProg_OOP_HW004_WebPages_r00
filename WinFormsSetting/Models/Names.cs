@@ -10,5 +10,8 @@ namespace WinFormsApp.Models
     {
         public abstract List<string> LbNames { get; set; }
         public abstract List<string> BtnNames { get; set; }
+        public abstract List<string> BtnNamesMF { get; set; }
+        public abstract Dictionary<string, string> LbNamesWebUC { get; set; }
+        public abstract Dictionary<string, string> BtnNamesWebUC { get; set; }
     }
 }

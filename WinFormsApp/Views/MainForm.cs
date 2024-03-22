@@ -1,25 +1,47 @@
 using ConsoleApp.Controllers;
 using ConsoleApp.Models;
+using WinFormsApp.Controllers;
 using WinFormsApp.Views.UserControls;
+using WinFormsApp.Models;
 
 namespace WinFormsApp
 {
     public partial class MainForm : Form
     {
-        private readonly string[] nameBtns;
+        private string[] nameBtns;
         private List<Button> menuBtns;
         private WebController db;
         private PsiSet psiSet;
+        private ControllerRegedit crRegedit;
 
         public MainForm()
         {
+            crRegedit = new ControllerRegedit();
+
             InitializeComponent();
             InitializeComponent2();
 
-            nameBtns = new string[] { "Default", "Custom", "Load", "Setting"};
+            //nameBtns = new string[] { "Default", "Custom", "Load"};
+            setNameBtns(crRegedit.language);
             menuBtns = new List<Button>(nameBtns.Length);
 
             for(int i = 0; i < nameBtns.Length; i++) { menuBtns.Add(new Button()); }
+        }
+
+        private void setNameBtns(in string language)
+        {
+            switch (language)
+            {
+                case "Italian":
+                    nameBtns = new NamesIt().BtnNamesMF.ToArray();
+                    break;
+                case "Russian":
+                    nameBtns = new NamesRu().BtnNamesMF.ToArray();
+                    break;
+                default:
+                    nameBtns = new NamesEn().BtnNamesMF.ToArray();
+                    break;
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -82,7 +104,7 @@ namespace WinFormsApp
             menuBtns[0].Enabled = false;
             menuBtns[2].Enabled = false;
 
-            this.Controls.Add(new GridWebsUC(db, ref psiSet) { Location = new Point(LbSqlCon.Left, menuBtns[0].Top + menuBtns[0].Height + 10) });
+            this.Controls.Add(new GridWebsUC(db, ref psiSet, ref crRegedit) { Location = new Point(LbSqlCon.Left, menuBtns[0].Top + menuBtns[0].Height + 10) });
         }
     }
 }

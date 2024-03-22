@@ -50,7 +50,7 @@
             BtnSave.Name = "BtnSave";
             BtnSave.Size = new Size(100, 40);
             BtnSave.TabIndex = 1;
-            BtnSave.Text = "Save";
+            BtnSave.Text = nameBtns["Save"];
             BtnSave.UseVisualStyleBackColor = true;
             BtnSave.MouseClick += BtnSave_MouseClick;
             // 
@@ -60,7 +60,7 @@
             BtnClose.Name = "BtnClose";
             BtnClose.Size = new Size(100, 40);
             BtnClose.TabIndex = 2;
-            BtnClose.Text = "Close";
+            BtnClose.Text = nameBtns["Close"];
             BtnClose.UseVisualStyleBackColor = true;
             BtnClose.MouseClick += BtnClose_MouseClick;
             // 
@@ -72,7 +72,7 @@
             LbMsg.Name = "LbMsg";
             LbMsg.Size = new Size(67, 20);
             LbMsg.TabIndex = 3;
-            LbMsg.Text = "Message";
+            LbMsg.Text = nameBtns["Message"];
             LbMsg.Visible = false;
             // 
             // AddWebUC

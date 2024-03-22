@@ -11,6 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
+using WinFormsApp.Models;
 
 namespace WinFormsApp.Views.UserControls
 {
@@ -22,9 +23,12 @@ namespace WinFormsApp.Views.UserControls
         private Process? process;
         private WebController webController;
         private Button BtnUpdate;
+        private Dictionary<string, string> nameBtns;
 
-        public AddWebUC()
+        public AddWebUC(in Names names)
         {
+            this.nameBtns = names.BtnNamesWebUC;
+
             InitializeComponent();
             Visible = false;
             tBxEnter.Text = tbxfill;
@@ -32,11 +36,11 @@ namespace WinFormsApp.Views.UserControls
             BtnClose.Enabled = false;
         }
 
-        public AddWebUC(ref PsiSet psiSet, ref WebController webController, in Button BtnUpdate) : this() 
+        public AddWebUC(ref PsiSet psiSet, ref WebController webController, in Button BtnUpdate, in Names names) : this(names) 
         {
             this.psiSet = psiSet;
             this.webController = webController;
-            this.BtnUpdate = BtnUpdate;
+            this.BtnUpdate = BtnUpdate;            
 
             //BtnSave.DataBindings.Add(new Binding("Text", BtnUpdate, "Name"));
         }

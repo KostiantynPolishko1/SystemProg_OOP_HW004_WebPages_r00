@@ -11,7 +11,6 @@ namespace WinFormsApp
     partial class MainForm
     {
         private SetForm setForm;
-        private ControllerRegedit crRegedit;
         public Button BtnSetting { get; set; }
         private void InitializeComponent2()
         {
@@ -35,9 +34,7 @@ namespace WinFormsApp
             FormBorderStyle = FormBorderStyle.FixedSingle;
             WindowState = FormWindowState.Normal;
             FormClosed += MainForm_FormClosed;
-            ResumeLayout(false);
-
-            crRegedit = new ControllerRegedit();
+            ResumeLayout(false);           
 
             setLightTheme(crRegedit.flagsRegedit[(int)Setting.Theme]);
             setStartSize(crRegedit.flagsRegedit[(int)Setting.Mode]);

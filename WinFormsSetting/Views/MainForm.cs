@@ -33,8 +33,7 @@ namespace WinFormsApp
                 default:
                     setForm = new SetForm(this, crRegedit, getPosSetForm(crRegedit.flagsRegedit[(int)Setting.Mode]), new NamesEn());
                     break;
-            }
-            
+            }          
         }
 
         private void BtnSetting_MouseClick(object sender, MouseEventArgs e)
