@@ -6,10 +6,13 @@ using System.ComponentModel;
 using System.ComponentModel.Design.Serialization;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Text;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormsApp.Controllers;
+using WinFormsApp.Models;
 
 namespace WinFormsApp.Views.UserControls
 {
@@ -18,6 +21,11 @@ namespace WinFormsApp.Views.UserControls
         private WebController webController;
         private List<Button> menuBtns;
         private readonly string[] nameBtns;
+        private AddWebUC addWebUC;
+        private PsiSet psiSet;
+        private ControllerRegedit crRegedit;
+        private Names languge;
+
         public GridWebsUC()
         {
             InitializeComponent();
@@ -39,10 +47,39 @@ namespace WinFormsApp.Views.UserControls
             }
         }
 
-        public GridWebsUC(in WebController webController) : this()
+        public GridWebsUC(in WebController webController, ref PsiSet psiSet, ref ControllerRegedit crRegedit) : this()
         {
             this.webController = webController;
+            this.psiSet = psiSet;
+            this.crRegedit = crRegedit;
 
+            //addWebUC = new AddWebUC(ref this.psiSet, ref this.webController, menuBtns[0]) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+            createAddWebUc(crRegedit.language);
+            this.Controls.Add(addWebUC);
+
+            Reload();
+        }
+
+        private void createAddWebUc(in string language)
+        {
+            switch (language)
+            {
+                case "Italian":
+                    addWebUC = new AddWebUC(ref this.psiSet, ref this.webController, menuBtns[0], new NamesIt()) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+                    break;
+                case "Russian":
+                    addWebUC = new AddWebUC(ref this.psiSet, ref this.webController, menuBtns[0], new NamesRu()) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+                    break;
+                default:
+                    addWebUC = new AddWebUC(ref this.psiSet, ref this.webController, menuBtns[0], new NamesEn()) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+                    break;
+            }
+        }
+
+
+        private void BtnUpdate_MouseClick(object sender, MouseEventArgs e)
+        {
+            this.PnWeb.Controls.Clear();
             Reload();
         }
 
@@ -51,9 +88,13 @@ namespace WinFormsApp.Views.UserControls
             btn.UseVisualStyleBackColor = true;
             btn.BackgroundImageLayout = ImageLayout.Zoom;
 
-            if (btn.Name == $"Btn{nameBtns[0]}") { btn.BackgroundImage = WinFormsApp.Properties.Resources.refresh; }
-            else if (btn.Name == $"Btn{nameBtns[1]}") { btn.BackgroundImage = WinFormsApp.Properties.Resources.clear; }
-            else if (btn.Name == $"Btn{nameBtns[2]}") { btn.BackgroundImage = WinFormsApp.Properties.Resources.search; }
+            if (btn.Name == $"Btn{nameBtns[0]}")
+            {
+                btn.BackgroundImage = Properties.Resources.refresh;
+                btn.MouseClick += BtnUpdate_MouseClick;
+            }
+            else if (btn.Name == $"Btn{nameBtns[1]}") { btn.BackgroundImage = Properties.Resources.clear; }
+            else if (btn.Name == $"Btn{nameBtns[2]}") { btn.BackgroundImage = Properties.Resources.search; }
         }
 
         private void CreateObj(in Control control, in Point point, string name, string Text = "")
@@ -69,31 +110,36 @@ namespace WinFormsApp.Views.UserControls
         private void Reload()
         {
             int X = 5, Y = 5, space = 5;
-            int i = 0;
+            int i = 1;
 
-/*            string msg = webController.GetAllWebShortcuts(out List<webshortcut>? webShortcuts);
+            string msg = webController.GetAllWebShortcuts(out List<webshortcut>? webShortcuts);
             if (msg != string.Empty)
             {
                 MessageBox.Show(msg);
                 return;
-            }*/
-
-            List<webshortcut> webShortcuts = webController.webshortcuts.ToList();
+            }
 
             int offsetX = new WebUC().Width + space;
             int offsetY = new WebUC().Height + space;
 
-            foreach(webshortcut web in webShortcuts)
+            foreach (webshortcut web in webShortcuts)
             {
-                this.PnWeb.Controls.Add(new WebUC(web.id, web.name, web.href, ref webController) { Location = new Point(X, Y)});
+                this.PnWeb.Controls.Add(new WebUC(web.id, web.name, web.href, ref webController) { Location = new Point(X, Y) });
+                offsetXY(ref X, ref Y);
+            }
+
+            this.PnWeb.Controls.Add(new WebUC(webShortcuts.Count + 1, "New", "href", ref webController, ref addWebUC) { Location = new Point(X, Y) });
+
+            void offsetXY(ref int X, ref int Y)
+            {
                 X += offsetX;
 
-                i += 1;
-                if (i % 3 == 0)
+                if (i % 4 == 0)
                 {
                     Y += offsetY;
                     X = 5;
                 }
+                i += 1;
             }
         }
     }

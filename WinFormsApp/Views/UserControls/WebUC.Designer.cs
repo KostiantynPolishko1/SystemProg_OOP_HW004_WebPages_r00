@@ -58,15 +58,11 @@ namespace WinFormsApp.Views.UserControls
             // 
             // PnWeb
             // 
-            PnWeb.BackgroundImage = Properties.Resources.GoogleChromeLogo;
             PnWeb.BackgroundImageLayout = ImageLayout.Zoom;
             PnWeb.Location = new Point(0, 25);
             PnWeb.Name = "PnWeb";
             PnWeb.Size = new Size(150, 100);
             PnWeb.TabIndex = 2;
-            PnWeb.MouseClick += PnWeb_MouseClick;
-            PnWeb.MouseLeave += PnWeb_MouseLeave;
-            PnWeb.MouseHover += PnWeb_MouseHover;
             // 
             // LbId
             // 
@@ -84,7 +80,7 @@ namespace WinFormsApp.Views.UserControls
             LbHref.Name = "LbHref";
             LbHref.Size = new Size(54, 20);
             LbHref.TabIndex = 3;
-            LbHref.Text = "LbHref";
+            LbHref.Text = "Link";
             LbHref.Visible = false;
             // 
             // LbWebState
@@ -94,7 +90,7 @@ namespace WinFormsApp.Views.UserControls
             LbWebState.Name = "LbWebState";
             LbWebState.Size = new Size(73, 20);
             LbWebState.TabIndex = 4;
-            LbWebState.Text = "WebState";
+            LbWebState.Text = "State";
             LbWebState.Visible = false;
             // 
             // WebUC

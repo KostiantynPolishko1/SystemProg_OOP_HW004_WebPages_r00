@@ -12,7 +12,7 @@ namespace ConsoleApp.Controllers
 {
     public static class UserProcess
     {
-        public static (Process?, string) OpenWebPage(in string href, ProcessStartInfo psi)
+        public static (Process?, string) OpenWebPage(in string href, in ProcessStartInfo psi)
         {
             try
             {
