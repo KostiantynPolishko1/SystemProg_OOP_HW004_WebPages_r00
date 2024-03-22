@@ -6,45 +6,58 @@ namespace WinFormsApp
 {
     public partial class MainForm : Form
     {
-        private readonly string[] nameBtns;
-        private List<Button> menuBtns;
+        //private readonly string[] nameBtns;
+        //private List<Button> menuBtns;
         private WebController db;
         private PsiSet psiSet;
 
         public MainForm()
         {
             InitializeComponent();
+            languages = new List<string>() { "English", "Italian", "Russian" };
 
-            nameBtns = new string[] { "Default", "Custom", "Load", "Setting" };
-            menuBtns = new List<Button>(nameBtns.Length);
+            //nameBtns = new string[] { "Default", "Custom", "Load" };
+            //menuBtns = new List<Button>(nameBtns.Length);
 
-            for (int i = 0; i < nameBtns.Length; i++) { menuBtns.Add(new Button()); }
+            setMenuClick(mnDefault, mnCustom, mnLoad);
+            mncmLanguage.Items.AddRange(languages.ToArray());
+
+            //for (int i = 0; i < nameBtns.Length; i++) { menuBtns.Add(new Button()); }
+        }
+
+        private void setMenuClick(params ToolStripMenuItem[] items)
+        {
+            for (int i = 0; i != items.Length; i++)
+            {
+                items[i].Checked = false;
+                items[i].CheckOnClick = true;
+            }
         }
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            CreateObj(menuBtns[0], new Point(LbSqlCon.Left + LbSqlCon.Width + 10, LbSqlCon.Top), $"Btn{nameBtns[0]}", nameBtns[0]);
-            CreateObj(menuBtns[1], new Point(menuBtns[0].Left + menuBtns[0].Width + 10, LbSqlCon.Top), $"Btn{nameBtns[1]}", nameBtns[1]);
+            //CreateObj(menuBtns[0], new Point(LbSqlCon.Left + LbSqlCon.Width + 10, LbSqlCon.Top), $"Btn{nameBtns[0]}", nameBtns[0]);
+            //CreateObj(menuBtns[1], new Point(menuBtns[0].Left + menuBtns[0].Width + 10, LbSqlCon.Top), $"Btn{nameBtns[1]}", nameBtns[1]);
 
-            menuBtns[0].MouseClick += BtnDefault_MouseClick;
+            //menuBtns[0].MouseClick += BtnDefault_MouseClick;
         }
 
-        private void CreateObj(in Control control, in Point point, string Name, string Text)
-        {
-            control.Name = Name;
-            control.Text = Text;
-            control.Size = new Size(100, 30);
-            control.Location = point;
-            control.TabIndex = 1;
+        /*        private void CreateObj(in Control control, in Point point, string Name, string Text)
+                {
+                    control.Name = Name;
+                    control.Text = Text;
+                    control.Size = new Size(100, 30);
+                    control.Location = point;
+                    control.TabIndex = 1;
 
-            if (control is Button)
-            {
-                control.BackColor = Color.White;
-                control.ForeColor = Color.Black;
-            }
+                    if (control is Button)
+                    {
+                        control.BackColor = Color.White;
+                        control.ForeColor = Color.Black;
+                    }
 
-            this.Controls.Add(control);
-        }
+                    this.Controls.Add(control);
+                }*/
 
         private void BtnDefault_MouseClick(object sender, MouseEventArgs e)
         {
@@ -53,17 +66,17 @@ namespace WinFormsApp
 
             psiSet = new PsiSet();
 
-            menuBtns[0].BackColor = Color.DarkGreen;
-            menuBtns[0].ForeColor = Color.White;
+            /*            menuBtns[0].BackColor = Color.DarkGreen;
+                        menuBtns[0].ForeColor = Color.White;
 
-            menuBtns[1].BackColor = Color.Gray;
-            menuBtns[1].Enabled = false;
-            menuBtns[1].Visible = false;
+                        menuBtns[1].BackColor = Color.Gray;
+                        menuBtns[1].Enabled = false;
+                        menuBtns[1].Visible = false;
 
-            CreateObj(menuBtns[2], new Point(menuBtns[0].Left + menuBtns[0].Width + 10, LbSqlCon.Top), $"{nameBtns[2]}Btn", nameBtns[2]);
-            menuBtns[2].BackColor = Color.Blue;
-            menuBtns[2].ForeColor = Color.White;
-            menuBtns[2].MouseClick += BtnLoad_MouseClick;
+                        CreateObj(menuBtns[2], new Point(menuBtns[0].Left + menuBtns[0].Width + 10, LbSqlCon.Top), $"{nameBtns[2]}Btn", nameBtns[2]);
+                        menuBtns[2].BackColor = Color.Blue;
+                        menuBtns[2].ForeColor = Color.White;
+                        menuBtns[2].MouseClick += BtnLoad_MouseClick;*/
 
         }
 
@@ -78,10 +91,10 @@ namespace WinFormsApp
 
         private void BtnLoad_MouseClick(object sender, MouseEventArgs e)
         {
-            menuBtns[0].Enabled = false;
-            menuBtns[2].Enabled = false;
+            /*            menuBtns[0].Enabled = false;
+                        menuBtns[2].Enabled = false;*/
 
-            this.Controls.Add(new GridWebsUC(db, ref psiSet) { Location = new Point(LbSqlCon.Left, menuBtns[0].Top + menuBtns[0].Height + 10) });
+            this.Controls.Add(new GridWebsUC(db, ref psiSet) { Location = new Point(10, 10) });
         }
     }
 }
