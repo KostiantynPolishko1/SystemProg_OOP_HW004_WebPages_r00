@@ -5,7 +5,7 @@ VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{4FCD9612-D768-485A-88B4-225AC94C1FAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsMenu", "WinFormsMenu\WinFormsMenu.csproj", "{D21D6411-23A5-41B2-BAAB-64077A3AA00E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsMenu", "WinFormsMenu\WinFormsMenu.csproj", "{D21D6411-23A5-41B2-BAAB-64077A3AA00E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -41,6 +41,7 @@
             mnLanguages = new ToolStripMenuItem();
             mncmLanguage = new ToolStripComboBox();
             mnInfo = new ToolStripMenuItem();
+            mncmActions = new ToolStripComboBox();
             mnMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -51,7 +52,7 @@
             mnMain.Items.AddRange(new ToolStripItem[] { mnConnection, mnSetting, mnInfo });
             mnMain.Location = new Point(0, 0);
             mnMain.Name = "mnMain";
-            mnMain.Size = new Size(640, 28);
+            mnMain.Size = new Size(645, 28);
             mnMain.TabIndex = 0;
             mnMain.Text = "mnMain";
             // 
@@ -63,30 +64,29 @@
             mnConnection.Text = "Connection";
             // 
             // mnDefault
-            //
             // 
             mnDefault.DropDownItems.AddRange(new ToolStripItem[] { mnLoad });
             mnDefault.Name = "mnDefault";
-            mnDefault.Size = new Size(224, 26);
+            mnDefault.Size = new Size(142, 26);
             mnDefault.Text = "Default";
             mnDefault.CheckedChanged += mnDefault_CheckedChanged;
             // 
             // mnLoad
             // 
             mnLoad.Name = "mnLoad";
-            mnLoad.Size = new Size(224, 26);
+            mnLoad.Size = new Size(125, 26);
             mnLoad.Text = "Load";
             mnLoad.CheckedChanged += mnLoad_CheckedChanged;
             // 
             // mnCustom
             // 
             mnCustom.Name = "mnCustom";
-            mnCustom.Size = new Size(224, 26);
+            mnCustom.Size = new Size(142, 26);
             mnCustom.Text = "Custom";
             // 
             // mnSetting
             // 
-            mnSetting.DropDownItems.AddRange(new ToolStripItem[] { mnAutoRun, mnDark, mnFullScreen, mnLanguages });
+            mnSetting.DropDownItems.AddRange(new ToolStripItem[] { mnAutoRun, mnDark, mnFullScreen, mnLanguages, mncmActions });
             mnSetting.Name = "mnSetting";
             mnSetting.Size = new Size(70, 24);
             mnSetting.Text = "Setting";
@@ -94,26 +94,26 @@
             // mnAutoRun
             // 
             mnAutoRun.Name = "mnAutoRun";
-            mnAutoRun.Size = new Size(163, 26);
+            mnAutoRun.Size = new Size(224, 26);
             mnAutoRun.Text = "AutoRun";
             // 
             // mnDark
             // 
             mnDark.Name = "mnDark";
-            mnDark.Size = new Size(163, 26);
+            mnDark.Size = new Size(224, 26);
             mnDark.Text = "Dark";
             // 
             // mnFullScreen
             // 
             mnFullScreen.Name = "mnFullScreen";
-            mnFullScreen.Size = new Size(163, 26);
+            mnFullScreen.Size = new Size(224, 26);
             mnFullScreen.Text = "Full Screen";
             // 
             // mnLanguages
             // 
             mnLanguages.DropDownItems.AddRange(new ToolStripItem[] { mncmLanguage });
             mnLanguages.Name = "mnLanguages";
-            mnLanguages.Size = new Size(163, 26);
+            mnLanguages.Size = new Size(224, 26);
             mnLanguages.Text = "Languages";
             // 
             // mncmLanguage
@@ -126,6 +126,11 @@
             mnInfo.Name = "mnInfo";
             mnInfo.Size = new Size(49, 24);
             mnInfo.Text = "Info";
+            // 
+            // mncmActions
+            // 
+            mncmActions.Name = "mncmActions";
+            mncmActions.Size = new Size(121, 28);
             // 
             // MainForm
             // 
@@ -158,6 +163,8 @@
         private ToolStripMenuItem mnLanguages;
         private ToolStripComboBox mncmLanguage;
         private ToolStripMenuItem mnInfo;
+        private ToolStripComboBox mncmActions;
         private List<string> languages;
+        private List<string> actions;
     }
 }

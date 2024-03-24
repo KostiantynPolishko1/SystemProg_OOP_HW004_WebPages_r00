@@ -1,5 +1,6 @@
 using ConsoleApp.Controllers;
 using ConsoleApp.Models;
+using WinFormsApp.Controllers;
 using WinFormsApp.Views.UserControls;
 
 namespace WinFormsApp
@@ -8,14 +9,21 @@ namespace WinFormsApp
     {
         private WebController db;
         private PsiSet psiSet;
+        private ControllerRegedit crRegedit;
 
         public MainForm()
         {
             InitializeComponent();
-            languages = new List<string>() { "English", "Italian", "Russian" };
 
-            setMenuClick(mnDefault, mnCustom, mnLoad);
+            crRegedit = new ControllerRegedit();
+            languages = new List<string>() { "English", "Italian", "Russian" };
+            actions = new List<string>() { "Reset", "Clear", "Save" };
+
+            setMenuClick(mnDefault, mnCustom, mnLoad, mnAutoRun, mnDark, mnFullScreen);
+            setSettingChecked(mnAutoRun, mnDark, mnFullScreen);
+
             mncmLanguage.Items.AddRange(languages.ToArray());
+            mncmActions.Items.AddRange(actions.ToArray());
             mnCustom.Enabled = false;
             mnLoad.Visible = false;
         }
@@ -26,6 +34,14 @@ namespace WinFormsApp
             {
                 items[i].Checked = false;
                 items[i].CheckOnClick = true;
+            }
+        }
+
+        private void setSettingChecked(params ToolStripMenuItem[] items)
+        {
+            for (int i = 0; i != items.Length; i++)
+            {
+                items[i].Checked = crRegedit.flagsRegedit[i];
             }
         }
 
