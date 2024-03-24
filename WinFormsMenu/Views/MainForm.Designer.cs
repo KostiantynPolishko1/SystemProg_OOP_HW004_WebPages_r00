@@ -40,8 +40,8 @@
             mnFullScreen = new ToolStripMenuItem();
             mnLanguages = new ToolStripMenuItem();
             mncmLanguage = new ToolStripComboBox();
-            mnInfo = new ToolStripMenuItem();
             mncmActions = new ToolStripComboBox();
+            mnInfo = new ToolStripMenuItem();
             mnMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -90,6 +90,8 @@
             mnSetting.Name = "mnSetting";
             mnSetting.Size = new Size(70, 24);
             mnSetting.Text = "Setting";
+            mnSetting.DropDownOpened += mnSetting_DropDownOpened;
+            mnSetting.Click += mnSetting_Click;
             // 
             // mnAutoRun
             // 
@@ -121,16 +123,17 @@
             mncmLanguage.Name = "mncmLanguage";
             mncmLanguage.Size = new Size(121, 28);
             // 
+            // mncmActions
+            // 
+            mncmActions.DropDownStyle = ComboBoxStyle.DropDownList;
+            mncmActions.Name = "mncmActions";
+            mncmActions.Size = new Size(121, 28);
+            // 
             // mnInfo
             // 
             mnInfo.Name = "mnInfo";
             mnInfo.Size = new Size(49, 24);
             mnInfo.Text = "Info";
-            // 
-            // mncmActions
-            // 
-            mncmActions.Name = "mncmActions";
-            mncmActions.Size = new Size(121, 28);
             // 
             // MainForm
             // 
@@ -157,14 +160,14 @@
         private ToolStripMenuItem mnLoad;
         private ToolStripMenuItem mnCustom;
         private ToolStripMenuItem mnSetting;
+        private ToolStripMenuItem mnInfo;
+        private List<string> languages;
+        private List<string> actions;
         private ToolStripMenuItem mnAutoRun;
         private ToolStripMenuItem mnDark;
         private ToolStripMenuItem mnFullScreen;
         private ToolStripMenuItem mnLanguages;
-        private ToolStripComboBox mncmLanguage;
-        private ToolStripMenuItem mnInfo;
         private ToolStripComboBox mncmActions;
-        private List<string> languages;
-        private List<string> actions;
+        private ToolStripComboBox mncmLanguage;
     }
 }
