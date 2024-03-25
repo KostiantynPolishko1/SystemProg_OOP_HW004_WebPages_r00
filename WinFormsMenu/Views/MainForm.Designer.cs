@@ -29,6 +29,7 @@
         /// 
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             mnMain = new MenuStrip();
             mnConnection = new ToolStripMenuItem();
             mnDefault = new ToolStripMenuItem();
@@ -42,7 +43,10 @@
             mncmLanguage = new ToolStripComboBox();
             mncmActions = new ToolStripComboBox();
             mnInfo = new ToolStripMenuItem();
+            imgFlags = new ImageList(components);
+            pcBxFlag = new PictureBox();
             mnMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pcBxFlag).BeginInit();
             SuspendLayout();
             // 
             // mnMain
@@ -96,26 +100,26 @@
             // mnAutoRun
             // 
             mnAutoRun.Name = "mnAutoRun";
-            mnAutoRun.Size = new Size(224, 26);
+            mnAutoRun.Size = new Size(195, 26);
             mnAutoRun.Text = "AutoRun";
             // 
             // mnDark
             // 
             mnDark.Name = "mnDark";
-            mnDark.Size = new Size(224, 26);
+            mnDark.Size = new Size(195, 26);
             mnDark.Text = "Dark";
             // 
             // mnFullScreen
             // 
             mnFullScreen.Name = "mnFullScreen";
-            mnFullScreen.Size = new Size(224, 26);
+            mnFullScreen.Size = new Size(195, 26);
             mnFullScreen.Text = "Full Screen";
             // 
             // mnLanguages
             // 
             mnLanguages.DropDownItems.AddRange(new ToolStripItem[] { mncmLanguage });
             mnLanguages.Name = "mnLanguages";
-            mnLanguages.Size = new Size(224, 26);
+            mnLanguages.Size = new Size(195, 26);
             mnLanguages.Text = "Languages";
             // 
             // mncmLanguage
@@ -134,6 +138,23 @@
             mnInfo.Name = "mnInfo";
             mnInfo.Size = new Size(49, 24);
             mnInfo.Text = "Info";
+            mnInfo.Click += mnInfo_Click;
+            // 
+            // imgFlags
+            // 
+            imgFlags.ColorDepth = ColorDepth.Depth32Bit;
+            imgFlags.ImageSize = new Size(25, 50);
+            imgFlags.TransparentColor = Color.Transparent;
+            // 
+            // pcBxFlag
+            // 
+            pcBxFlag.Location = new Point(555, 0);
+            pcBxFlag.Margin = new Padding(0);
+            pcBxFlag.Name = "pcBxFlag";
+            pcBxFlag.Size = new Size(90, 30);
+            pcBxFlag.SizeMode = PictureBoxSizeMode.Zoom;
+            pcBxFlag.TabIndex = 1;
+            pcBxFlag.TabStop = false;
             // 
             // MainForm
             // 
@@ -141,6 +162,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(645, 760);
+            Controls.Add(pcBxFlag);
             Controls.Add(mnMain);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MainMenuStrip = mnMain;
@@ -148,6 +170,7 @@
             Text = "WebPages";
             mnMain.ResumeLayout(false);
             mnMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pcBxFlag).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -169,5 +192,7 @@
         private ToolStripMenuItem mnLanguages;
         private ToolStripComboBox mncmActions;
         private ToolStripComboBox mncmLanguage;
+        private ImageList imgFlags;
+        private PictureBox pcBxFlag;
     }
 }

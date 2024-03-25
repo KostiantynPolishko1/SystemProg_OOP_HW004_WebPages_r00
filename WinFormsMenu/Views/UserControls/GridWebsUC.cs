@@ -26,7 +26,7 @@ namespace WinFormsApp.Views.UserControls
         {
             InitializeComponent();
 
-            nameBtns = new string[] { "Update", "Clear", "Search"};
+            nameBtns = new string[] { "Update", "Clear", "Search" };
             menuBtns = new List<Button>(nameBtns.Length);
 
             int startPosLeft = 570;
@@ -65,7 +65,8 @@ namespace WinFormsApp.Views.UserControls
             btn.UseVisualStyleBackColor = true;
             btn.BackgroundImageLayout = ImageLayout.Zoom;
 
-            if (btn.Name == $"Btn{nameBtns[0]}") { 
+            if (btn.Name == $"Btn{nameBtns[0]}")
+            {
                 btn.BackgroundImage = Image.FromFile("A:\\OneDrive - ITSTEP\\SystemProg\\Projects\\SystemProg_OOP_HW005_WebPages_r00\\WinFormsMenu\\Resources\\refresh.png"); ;
                 btn.MouseClick += BtnUpdate_MouseClick;
             }
@@ -98,9 +99,9 @@ namespace WinFormsApp.Views.UserControls
             int offsetX = new WebUC().Width + space;
             int offsetY = new WebUC().Height + space;
 
-            foreach(webshortcut web in webShortcuts)
+            foreach (webshortcut web in webShortcuts)
             {
-                this.PnWeb.Controls.Add(new WebUC(web.id, web.name, web.href, ref webController) { Location = new Point(X, Y)});
+                this.PnWeb.Controls.Add(new WebUC(web.id, web.name, web.href, ref webController) { Location = new Point(X, Y) });
                 offsetXY(ref X, ref Y);
             }
 
@@ -109,7 +110,7 @@ namespace WinFormsApp.Views.UserControls
             void offsetXY(ref int X, ref int Y)
             {
                 X += offsetX;
-               
+
                 if (i % 4 == 0)
                 {
                     Y += offsetY;

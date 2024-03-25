@@ -55,6 +55,5 @@ namespace WinFormsApp.Views.UserControls
         }
 
         #endregion
-
     }
 }

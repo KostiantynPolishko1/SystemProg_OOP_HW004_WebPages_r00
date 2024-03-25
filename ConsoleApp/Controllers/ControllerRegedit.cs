@@ -19,7 +19,7 @@ namespace WinFormsApp.Controllers
 
         public ControllerRegedit()
         {
-            languages = new Dictionary<string, int>() { { "English", 0 }, { "Italian", 1 }, { "Russian", 2 } };
+            languages = new Dictionary<string, int>() { { "English", 0 }, { "Italian", 1 }, { "Ukrainian", 2 } };
             flagsRegedit = new List<bool>(regeditCount);
 
             for (int i = 0; i != regeditCount; i++)
