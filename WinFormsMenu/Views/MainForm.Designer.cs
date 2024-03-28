@@ -143,7 +143,7 @@
             // imgFlags
             // 
             imgFlags.ColorDepth = ColorDepth.Depth32Bit;
-            imgFlags.ImageSize = new Size(25, 50);
+            imgFlags.ImageSize = new Size(60, 30);
             imgFlags.TransparentColor = Color.Transparent;
             // 
             // pcBxFlag
