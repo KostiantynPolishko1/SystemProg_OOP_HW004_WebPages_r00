@@ -40,7 +40,7 @@ namespace WinFormsApp.Views.UserControls
             PnWeb.BackColor = Color.Aquamarine;
             PnWeb.Location = new Point(0, 60);
             PnWeb.Name = "PnWeb";
-            PnWeb.Size = new Size(620, 415);
+            PnWeb.Size = new Size(625, 415);
             PnWeb.TabIndex = 0;
             // 
             // GridWebsUC
@@ -50,11 +50,10 @@ namespace WinFormsApp.Views.UserControls
             BackColor = Color.FromArgb(147, 153, 250);
             Controls.Add(PnWeb);
             Name = "GridWebsUC";
-            Size = new Size(700, 700);
+            Size = new Size(625, 700);
             ResumeLayout(false);
         }
 
         #endregion
-
     }
 }

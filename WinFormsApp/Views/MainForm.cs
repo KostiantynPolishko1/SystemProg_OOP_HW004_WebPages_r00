@@ -12,7 +12,6 @@ namespace WinFormsApp
         private List<Button> menuBtns;
         private WebController db;
         private PsiSet psiSet;
-        private ControllerRegedit crRegedit;
 
         public MainForm()
         {
@@ -21,8 +20,7 @@ namespace WinFormsApp
             InitializeComponent();
             InitializeComponent2();
 
-            //nameBtns = new string[] { "Default", "Custom", "Load"};
-            setNameBtns(crRegedit.language);
+            nameBtns = new string[] { "Default", "Custom", "Load", "Setting"};
             menuBtns = new List<Button>(nameBtns.Length);
 
             for(int i = 0; i < nameBtns.Length; i++) { menuBtns.Add(new Button()); }
@@ -104,7 +102,7 @@ namespace WinFormsApp
             menuBtns[0].Enabled = false;
             menuBtns[2].Enabled = false;
 
-            this.Controls.Add(new GridWebsUC(db, ref psiSet, ref crRegedit) { Location = new Point(LbSqlCon.Left, menuBtns[0].Top + menuBtns[0].Height + 10) });
+            this.Controls.Add(new GridWebsUC(db, ref psiSet) { Location = new Point(LbSqlCon.Left, menuBtns[0].Top + menuBtns[0].Height + 10) });
         }
     }
 }

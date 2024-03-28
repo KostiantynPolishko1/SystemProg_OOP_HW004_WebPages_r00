@@ -11,8 +11,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using WinFormsApp.Controllers;
-using WinFormsApp.Models;
 
 namespace WinFormsApp.Views.UserControls
 {
@@ -28,7 +26,7 @@ namespace WinFormsApp.Views.UserControls
         {
             InitializeComponent();
 
-            nameBtns = new string[] { "Update", "Clear", "Search"};
+            nameBtns = new string[] { "Update", "Clear", "Search" };
             menuBtns = new List<Button>(nameBtns.Length);
 
             int startPosLeft = 570;
@@ -67,13 +65,13 @@ namespace WinFormsApp.Views.UserControls
             btn.UseVisualStyleBackColor = true;
             btn.BackgroundImageLayout = ImageLayout.Zoom;
 
-            if (btn.Name == $"Btn{nameBtns[0]}") 
-            { 
-                btn.BackgroundImage = Properties.Resources.refresh;
+            if (btn.Name == $"Btn{nameBtns[0]}")
+            {
+                btn.BackgroundImage = Image.FromFile("A:\\OneDrive - ITSTEP\\SystemProg\\Projects\\SystemProg_OOP_HW005_WebPages_r00\\WinFormsMenu\\Resources\\refresh.png"); ;
                 btn.MouseClick += BtnUpdate_MouseClick;
             }
-            else if (btn.Name == $"Btn{nameBtns[1]}") { btn.BackgroundImage = Properties.Resources.clear; }
-            else if (btn.Name == $"Btn{nameBtns[2]}") { btn.BackgroundImage = Properties.Resources.search; }
+            else if (btn.Name == $"Btn{nameBtns[1]}") { btn.BackgroundImage = Image.FromFile("A:\\OneDrive - ITSTEP\\SystemProg\\Projects\\SystemProg_OOP_HW005_WebPages_r00\\WinFormsMenu\\Resources\\clear.png"); ; }
+            else if (btn.Name == $"Btn{nameBtns[2]}") { btn.BackgroundImage = Image.FromFile("A:\\OneDrive - ITSTEP\\SystemProg\\Projects\\SystemProg_OOP_HW005_WebPages_r00\\WinFormsMenu\\Resources\\search.png"); ; }
         }
 
         private void CreateObj(in Control control, in Point point, string name, string Text = "")
@@ -111,16 +109,8 @@ namespace WinFormsApp.Views.UserControls
 
             void offsetXY(ref int X, ref int Y)
             {
-                this.PnWeb.Controls.Add(new WebUC(web.id, web.name, web.href, ref webController) { Location = new Point(X, Y)});
-                offsetXY(ref X, ref Y);
-            }
-
-            this.PnWeb.Controls.Add(new WebUC(webShortcuts.Count + 1, "New", "href", ref webController, ref addWebUC) { Location = new Point(X, Y) });
-
-            void offsetXY(ref int X, ref int Y)
-            {
                 X += offsetX;
-               
+
                 if (i % 4 == 0)
                 {
                     Y += offsetY;
