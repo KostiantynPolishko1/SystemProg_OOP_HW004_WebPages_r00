@@ -51,6 +51,7 @@
             BtnSave.Size = new Size(100, 40);
             BtnSave.TabIndex = 1;
             BtnSave.Text = "Save";
+
             BtnSave.UseVisualStyleBackColor = true;
             BtnSave.MouseClick += BtnSave_MouseClick;
             // 
@@ -61,6 +62,7 @@
             BtnClose.Size = new Size(100, 40);
             BtnClose.TabIndex = 2;
             BtnClose.Text = "Close";
+
             BtnClose.UseVisualStyleBackColor = true;
             BtnClose.MouseClick += BtnClose_MouseClick;
             // 

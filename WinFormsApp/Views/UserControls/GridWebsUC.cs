@@ -11,6 +11,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormsApp.Controllers;
+using WinFormsApp.Models;
 
 namespace WinFormsApp.Views.UserControls
 {
@@ -21,7 +23,6 @@ namespace WinFormsApp.Views.UserControls
         private readonly string[] nameBtns;
         private AddWebUC addWebUC;
         private PsiSet psiSet;
-        private SetForm setForm;
 
         public GridWebsUC()
         {
@@ -66,7 +67,8 @@ namespace WinFormsApp.Views.UserControls
             btn.UseVisualStyleBackColor = true;
             btn.BackgroundImageLayout = ImageLayout.Zoom;
 
-            if (btn.Name == $"Btn{nameBtns[0]}") { 
+            if (btn.Name == $"Btn{nameBtns[0]}") 
+            { 
                 btn.BackgroundImage = Properties.Resources.refresh;
                 btn.MouseClick += BtnUpdate_MouseClick;
             }
@@ -99,7 +101,15 @@ namespace WinFormsApp.Views.UserControls
             int offsetX = new WebUC().Width + space;
             int offsetY = new WebUC().Height + space;
 
-            foreach(webshortcut web in webShortcuts)
+            foreach (webshortcut web in webShortcuts)
+            {
+                this.PnWeb.Controls.Add(new WebUC(web.id, web.name, web.href, ref webController) { Location = new Point(X, Y) });
+                offsetXY(ref X, ref Y);
+            }
+
+            this.PnWeb.Controls.Add(new WebUC(webShortcuts.Count + 1, "New", "href", ref webController, ref addWebUC) { Location = new Point(X, Y) });
+
+            void offsetXY(ref int X, ref int Y)
             {
                 this.PnWeb.Controls.Add(new WebUC(web.id, web.name, web.href, ref webController) { Location = new Point(X, Y)});
                 offsetXY(ref X, ref Y);

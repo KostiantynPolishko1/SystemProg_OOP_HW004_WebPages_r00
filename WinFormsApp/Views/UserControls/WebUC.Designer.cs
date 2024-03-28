@@ -80,7 +80,7 @@ namespace WinFormsApp.Views.UserControls
             LbHref.Name = "LbHref";
             LbHref.Size = new Size(54, 20);
             LbHref.TabIndex = 3;
-            LbHref.Text = "LbHref";
+            LbHref.Text = "Link";
             LbHref.Visible = false;
             // 
             // LbWebState
@@ -90,7 +90,7 @@ namespace WinFormsApp.Views.UserControls
             LbWebState.Name = "LbWebState";
             LbWebState.Size = new Size(73, 20);
             LbWebState.TabIndex = 4;
-            LbWebState.Text = "WebState";
+            LbWebState.Text = "State";
             LbWebState.Visible = false;
             // 
             // WebUC

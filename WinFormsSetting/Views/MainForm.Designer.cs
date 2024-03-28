@@ -26,36 +26,37 @@
         ///  Required method for Designer support - do not modify
         ///  the contents of this method with the code editor.
         /// </summary>
-        /// 
         private void InitializeComponent()
         {
-            LbSqlCon = new Label();
+            BtnSetting = new Button();
             SuspendLayout();
             // 
-            // LbSqlCon
+            // BtnSetting
             // 
-            LbSqlCon.AutoSize = true;
-            LbSqlCon.Location = new Point(10, 10);
-            LbSqlCon.Name = "LbSqlCon";
-            LbSqlCon.Size = new Size(56, 20);
-            LbSqlCon.TabIndex = 0;
-            LbSqlCon.Text = "SqlCon";
+            BtnSetting.Location = new Point(340, 10);
+            BtnSetting.Name = "BtnSetting";
+            BtnSetting.Size = new Size(40, 40);
+            BtnSetting.TabIndex = 0;
+            BtnSetting.Text = "Setting";
+            BtnSetting.UseVisualStyleBackColor = true;
+            BtnSetting.MouseClick += BtnSetting_MouseClick;
             // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.White;
-            ClientSize = new Size(700, 760);
-            Controls.Add(LbSqlCon);
+            ClientSize = new Size(390, 100);
+            Controls.Add(BtnSetting);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Name = "MainForm";
-            Text = "WebPages";
-            Load += MainForm_Load;
+            Text = "MainForm";
+            WindowState = FormWindowState.Normal;
+            FormClosed += MainForm_FormClosed;
             ResumeLayout(false);
-            PerformLayout();
         }
 
-        private Label LbSqlCon;
         #endregion
+
+        public Button BtnSetting { get; set;}
     }
 }
