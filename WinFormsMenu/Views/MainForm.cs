@@ -5,6 +5,7 @@ using System.Diagnostics;
 using WinFormsApp.Controllers;
 using WinFormsApp.Views.UserControls;
 using WinFormsMenu;
+using WinFormsMenu.Models;
 
 namespace WinFormsApp
 {
@@ -13,13 +14,18 @@ namespace WinFormsApp
         private WebController db;
         private PsiSet psiSet;
         private ControllerRegedit crRegedit;
+        private ImageApp imgApp;
+        private CancellationTokenSource cts;
+        private GridWebsUC gridWebsUC;
 
         public MainForm()
         {
             InitializeComponent();
 
+            imgApp = new ImageApp();
             crRegedit = new ControllerRegedit();
             actions = new List<string>() { "Reset", "Clear", "Save" };
+            cts = new CancellationTokenSource();
 
             setMenuClick(mnDefault, mnCustom, mnLoad, mnAutoRun, mnDark, mnFullScreen);
             setSettingChecked(mnAutoRun, mnDark, mnFullScreen);
@@ -40,34 +46,12 @@ namespace WinFormsApp
 
         private void createImgFlags(in List<string> countries)
         {
-            string path = "A:\\OneDrive - ITSTEP\\SystemProg\\Projects\\SystemProg_OOP_HW005_WebPages_r00\\WinFormsMenu\\Resources\\flags\\";
+            string path = imgApp.path + "\\flags\\";
             foreach (string country in countries)
             {
                 imgFlags.Images.Add(Image.FromFile($"{path}{country}Flag.png"));
             }
         }
-
-        /*        private void createImgFlags2(in List<string> countries)
-                {
-                    Image img = Image.FromFile("A:\\OneDrive - ITSTEP\\SystemProg\\Projects\\SystemProg_OOP_HW005_WebPages_r00\\WinFormsMenu\\Resources\\flags\\EnglishFlag.png");
-                    imgFlags.Images.Add(img);
-
-                    Graphics g = Graphics.FromHwnd(this.Handle);
-
-                    imgFlags.Draw(g, new Point(50, 50), 0);
-
-
-                    // Create coordinates for upper-left corner of image.
-                    float x = 100.0F;
-                    float y = 100.0F;
-
-                    // Create rectangle for source image.
-                    RectangleF srcRect = new RectangleF(50.0F, 50.0F, 150.0F, 150.0F);
-                    GraphicsUnit units = GraphicsUnit.Pixel;
-
-                    // Draw image to screen.
-                    g.DrawImage(img, x, y, srcRect, units);
-                }*/
 
         private void setLightTheme(bool flag)
         {
@@ -118,7 +102,8 @@ namespace WinFormsApp
 
         private void mnLoad_CheckedChanged(object sender, EventArgs e)
         {
-            this.Controls.Add(new GridWebsUC(db, ref psiSet) { Location = new Point(10, 35) });
+            gridWebsUC = new GridWebsUC(db, ref psiSet, imgApp, cts) { Location = new Point(10, 35) };
+            this.Controls.Add(gridWebsUC);
             mnConnection.Enabled = false;
         }
 
@@ -177,12 +162,19 @@ namespace WinFormsApp
             {
                 if (msg != string.Empty) { MessageBox.Show(msg); }
             }
-
         }
 
-        private void mnInfo_Click(object sender, EventArgs e)
+        private void mnInfo_Click(object sender, EventArgs e) => new AppInfo().ShowDialog();
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            new AppInfo().ShowDialog();
+            if(!cts.IsCancellationRequested) 
+            { 
+                cts.Cancel();
+                cts.Dispose();
+            }
+
+            gridWebsUC.tokenAddWebUCCancel();
         }
     }
 }

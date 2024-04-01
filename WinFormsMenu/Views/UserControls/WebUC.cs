@@ -11,6 +11,7 @@ using ConsoleApp.Controllers;
 using System.Diagnostics;
 using ConsoleApp.Models;
 using System.Resources;
+using WinFormsMenu.Models;
 
 namespace WinFormsApp.Views.UserControls
 {
@@ -19,14 +20,19 @@ namespace WinFormsApp.Views.UserControls
         private PsiSet psiSet;
         private WebController webController;
         private AddWebUC addWebUC;
+        private ImageApp imgApp;
+        private Thread th = null;
+        private CancellationTokenSource cts;
+
         public WebUC()
         {
             InitializeComponent();
         }
 
-        public WebUC(int id, in string name, in string href, ref WebController webController) : this()
+        public WebUC(int id, in string name, in string href, ref WebController webController, in ImageApp imgApp) : this()
         {
             this.webController = webController;
+            this.imgApp = imgApp;
 
             this.Name = $"WebUC_{id}";
             LbId.Text = id.ToString();
@@ -35,11 +41,15 @@ namespace WinFormsApp.Views.UserControls
 
             WebUC_Events();
         }
-
-        public WebUC(int id, in string name, in string href, ref WebController webController, ref AddWebUC addWebUC) : this()
+        
+        public WebUC(int id, in string name, in string href, ref WebController webController, ref AddWebUC addWebUC, in ImageApp imgApp,
+            ref Thread th, ref CancellationTokenSource cts) : this()
         {
             this.webController = webController;
             this.addWebUC = addWebUC;
+            this.imgApp = imgApp;
+            this.th = th;
+            this.cts = cts;
 
             this.Name = $"{name}WebUC_{id}";
             LbId.Text = id.ToString();
@@ -51,7 +61,7 @@ namespace WinFormsApp.Views.UserControls
 
         private void WebUC_Events()
         {
-            PnWeb.BackgroundImage = Image.FromFile("A:\\OneDrive - ITSTEP\\SystemProg\\Projects\\SystemProg_OOP_HW005_WebPages_r00\\WinFormsMenu\\Resources\\GoogleChromeLogo.png");
+            PnWeb.BackgroundImage = imgApp.btnImage["GoogleChromeLogo"];
             PnWeb.MouseClick += PnWeb_MouseClick;
             PnWeb.MouseLeave += PnWeb_MouseLeave;
             PnWeb.MouseHover += PnWeb_MouseHover;
@@ -59,7 +69,7 @@ namespace WinFormsApp.Views.UserControls
 
         private void NewWebUC_Events()
         {
-            PnWeb.BackgroundImage = Image.FromFile("A:\\OneDrive - ITSTEP\\SystemProg\\Projects\\SystemProg_OOP_HW005_WebPages_r00\\WinFormsMenu\\Resources\\newtab.png");
+            PnWeb.BackgroundImage = imgApp.btnImage["newtab"];
             PnWeb.MouseClick += NewWebUC_MouseClick;
             PnWeb.MouseLeave += NewWebUC_MouseLeave;
             PnWeb.MouseHover += NewWebUC_MouseHover;
@@ -72,6 +82,28 @@ namespace WinFormsApp.Views.UserControls
         private void NewWebUC_MouseClick(object sender, MouseEventArgs e)
         {
             addWebUC.Visible = true;
+            tokenCancel();
+            tokenAddWebUCCancel();
+        }
+
+        private void tokenCancel()
+        {
+            if (th != null && th.IsAlive)
+            {
+                cts.Cancel();
+                th.Join();
+                cts.Dispose();
+            }
+        }
+
+        public void tokenAddWebUCCancel()
+        {
+            if (addWebUC.th != null && addWebUC.th.IsAlive)
+            {
+                addWebUC.cts.Cancel();
+                addWebUC.th.Join();
+                addWebUC.cts.Dispose();
+            }
         }
 
         private void NewWebUC_MouseHover(object sender, EventArgs e)
@@ -86,14 +118,12 @@ namespace WinFormsApp.Views.UserControls
 
         private void PnWeb_MouseHover(object sender, EventArgs e)
         {
-            PnWeb.BackgroundImage = Image.FromFile("A:\\OneDrive - ITSTEP\\SystemProg\\Projects\\SystemProg_OOP_HW005_WebPages_r00\\WinFormsMenu\\Resources\\iconopen.png");
-
+            PnWeb.BackgroundImage = imgApp.btnImage["iconopen"];
         }
 
         private void PnWeb_MouseLeave(object sender, EventArgs e)
         {
-            PnWeb.BackgroundImage = Image.FromFile("A:\\OneDrive - ITSTEP\\SystemProg\\Projects\\SystemProg_OOP_HW005_WebPages_r00\\WinFormsMenu\\Resources\\GoogleChromeLogo.png");
-
+            PnWeb.BackgroundImage = imgApp.btnImage["GoogleChromeLogo"];
         }
 
         private void PnWeb_MouseClick(object sender, MouseEventArgs e)
