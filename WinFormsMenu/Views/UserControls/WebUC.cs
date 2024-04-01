@@ -21,6 +21,9 @@ namespace WinFormsApp.Views.UserControls
         private WebController webController;
         private AddWebUC addWebUC;
         private ImageApp imgApp;
+        private Thread th = null;
+        private CancellationTokenSource cts;
+
         public WebUC()
         {
             InitializeComponent();
@@ -38,12 +41,15 @@ namespace WinFormsApp.Views.UserControls
 
             WebUC_Events();
         }
-
-        public WebUC(int id, in string name, in string href, ref WebController webController, ref AddWebUC addWebUC, in ImageApp imgApp) : this()
+        
+        public WebUC(int id, in string name, in string href, ref WebController webController, ref AddWebUC addWebUC, in ImageApp imgApp,
+            ref Thread th, ref CancellationTokenSource cts) : this()
         {
             this.webController = webController;
             this.addWebUC = addWebUC;
             this.imgApp = imgApp;
+            this.th = th;
+            this.cts = cts;
 
             this.Name = $"{name}WebUC_{id}";
             LbId.Text = id.ToString();
@@ -76,6 +82,13 @@ namespace WinFormsApp.Views.UserControls
         private void NewWebUC_MouseClick(object sender, MouseEventArgs e)
         {
             addWebUC.Visible = true;
+
+            if (th != null && th.IsAlive)
+            {
+                cts.Cancel();
+                th.Join();
+                cts.Dispose();
+            }
         }
 
         private void NewWebUC_MouseHover(object sender, EventArgs e)

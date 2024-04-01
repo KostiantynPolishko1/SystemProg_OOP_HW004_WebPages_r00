@@ -168,6 +168,7 @@
             MainMenuStrip = mnMain;
             Name = "MainForm";
             Text = "WebPages";
+            FormClosed += MainForm_FormClosed;
             mnMain.ResumeLayout(false);
             mnMain.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pcBxFlag).EndInit();

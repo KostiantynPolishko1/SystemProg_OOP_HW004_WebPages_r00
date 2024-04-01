@@ -15,6 +15,7 @@ namespace WinFormsApp
         private PsiSet psiSet;
         private ControllerRegedit crRegedit;
         private ImageApp imgApp;
+        private CancellationTokenSource cts;
 
         public MainForm()
         {
@@ -23,6 +24,7 @@ namespace WinFormsApp
             imgApp = new ImageApp();
             crRegedit = new ControllerRegedit();
             actions = new List<string>() { "Reset", "Clear", "Save" };
+            cts = new CancellationTokenSource();
 
             setMenuClick(mnDefault, mnCustom, mnLoad, mnAutoRun, mnDark, mnFullScreen);
             setSettingChecked(mnAutoRun, mnDark, mnFullScreen);
@@ -99,7 +101,7 @@ namespace WinFormsApp
 
         private void mnLoad_CheckedChanged(object sender, EventArgs e)
         {
-            this.Controls.Add(new GridWebsUC(db, ref psiSet, imgApp ) { Location = new Point(10, 35) });
+            this.Controls.Add(new GridWebsUC(db, ref psiSet, imgApp, cts) { Location = new Point(10, 35) });
             mnConnection.Enabled = false;
         }
 
@@ -164,6 +166,11 @@ namespace WinFormsApp
         private void mnInfo_Click(object sender, EventArgs e)
         {
             new AppInfo().ShowDialog();
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            cts.Cancel();
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Windows.Forms;
@@ -22,6 +23,8 @@ namespace WinFormsApp.Views.UserControls
         private Process? process;
         private WebController webController;
         private Button BtnUpdate;
+        private Thread th = null;
+        private CancellationTokenSource cts;
 
         public AddWebUC()
         {
@@ -29,14 +32,17 @@ namespace WinFormsApp.Views.UserControls
             Visible = false;
             tBxEnter.Text = tbxfill;
             BtnSave.Enabled = false;
-            BtnClose.Enabled = false;
+            //BtnClose.Enabled = false;
         }
 
-        public AddWebUC(ref PsiSet psiSet, ref WebController webController, in Button BtnUpdate) : this() 
+        public AddWebUC(ref PsiSet psiSet, ref WebController webController, in Button BtnUpdate
+            , ref CancellationTokenSource cts) : this() 
         {
             this.psiSet = psiSet;
             this.webController = webController;
             this.BtnUpdate = BtnUpdate;
+            this.th = th;
+            this.cts = cts;
 
             //BtnSave.DataBindings.Add(new Binding("Text", BtnUpdate, "Name"));
         }
@@ -86,13 +92,24 @@ namespace WinFormsApp.Views.UserControls
         private void BtnClose_MouseClick(object sender, MouseEventArgs e)
         {
             WebUCNotEnanble();
+            startAnime();
+        }
+
+        private void startAnime()
+        {
+            if (th == null || !th.IsAlive)
+            {
+                cts = new CancellationTokenSource();
+                //th = new Thread(new ParameterizedThreadStart(_ => animePic3(cts.Token)));
+                //th.Start();
+            }
         }
 
         private void WebUCNotEnanble()
         {
             tBxEnter.Text = tbxfill;
             BtnSave.Enabled = false;
-            BtnClose.Enabled = false;
+            //BtnClose.Enabled = false;
             process = null;
             this.Visible = false;
         }
