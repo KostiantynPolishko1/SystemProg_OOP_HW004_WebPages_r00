@@ -53,12 +53,13 @@ namespace WinFormsApp.Views.UserControls
         {
             this.webController = webController;
             this.psiSet = psiSet;
-            //cts = new CancellationTokenSource();
-            th = new Thread(new ParameterizedThreadStart(_ => animePic3(this.cts.Token)));
 
-            addWebUC = new AddWebUC(ref this.psiSet, ref this.webController, menuBtns[0], ref this.cts) { Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+            addWebUC = new AddWebUC(ref this.psiSet, ref this.webController, menuBtns[0], animePic3) 
+            {Location = new Point(PnWeb.Left + 5, PnWeb.Top + PnWeb.Height + 5) };
+
             this.Controls.Add(addWebUC);
 
+            th = new Thread(new ParameterizedThreadStart(_ => animePic3(this.cts.Token)));
             Reload();
         }
 
@@ -151,7 +152,20 @@ namespace WinFormsApp.Views.UserControls
                 }
             }
 
-            if(token.IsCancellationRequested) { pcBx.Visible = false; }
+            if(token.IsCancellationRequested) 
+            { 
+                pcBx.Visible = false;
+            }
+        }
+
+        public void tokenAddWebUCCancel()
+        {
+            if (addWebUC.th != null && addWebUC.th.IsAlive)
+            {
+                addWebUC.cts.Cancel();
+                addWebUC.th.Join();
+                addWebUC.cts.Dispose();
+            }
         }
     }
 }

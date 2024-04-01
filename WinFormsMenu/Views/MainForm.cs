@@ -16,6 +16,7 @@ namespace WinFormsApp
         private ControllerRegedit crRegedit;
         private ImageApp imgApp;
         private CancellationTokenSource cts;
+        private GridWebsUC gridWebsUC;
 
         public MainForm()
         {
@@ -101,7 +102,8 @@ namespace WinFormsApp
 
         private void mnLoad_CheckedChanged(object sender, EventArgs e)
         {
-            this.Controls.Add(new GridWebsUC(db, ref psiSet, imgApp, cts) { Location = new Point(10, 35) });
+            gridWebsUC = new GridWebsUC(db, ref psiSet, imgApp, cts) { Location = new Point(10, 35) };
+            this.Controls.Add(gridWebsUC);
             mnConnection.Enabled = false;
         }
 
@@ -160,17 +162,19 @@ namespace WinFormsApp
             {
                 if (msg != string.Empty) { MessageBox.Show(msg); }
             }
-
         }
 
-        private void mnInfo_Click(object sender, EventArgs e)
-        {
-            new AppInfo().ShowDialog();
-        }
+        private void mnInfo_Click(object sender, EventArgs e) => new AppInfo().ShowDialog();
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-            cts.Cancel();
+            if(!cts.IsCancellationRequested) 
+            { 
+                cts.Cancel();
+                cts.Dispose();
+            }
+
+            gridWebsUC.tokenAddWebUCCancel();
         }
     }
 }

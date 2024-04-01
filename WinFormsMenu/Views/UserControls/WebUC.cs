@@ -82,12 +82,27 @@ namespace WinFormsApp.Views.UserControls
         private void NewWebUC_MouseClick(object sender, MouseEventArgs e)
         {
             addWebUC.Visible = true;
+            tokenCancel();
+            tokenAddWebUCCancel();
+        }
 
+        private void tokenCancel()
+        {
             if (th != null && th.IsAlive)
             {
                 cts.Cancel();
                 th.Join();
                 cts.Dispose();
+            }
+        }
+
+        public void tokenAddWebUCCancel()
+        {
+            if (addWebUC.th != null && addWebUC.th.IsAlive)
+            {
+                addWebUC.cts.Cancel();
+                addWebUC.th.Join();
+                addWebUC.cts.Dispose();
             }
         }
 

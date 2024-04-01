@@ -48,6 +48,7 @@ namespace WinFormsApp.Views.UserControls
             // pcBx
             // 
             pcBx.BackColor = Color.Lime;
+            pcBx.SizeMode = PictureBoxSizeMode.Zoom;
             pcBx.BorderStyle = BorderStyle.FixedSingle;
             pcBx.Location = new Point(5, 595);
             pcBx.Margin = new Padding(0);

@@ -23,8 +23,10 @@ namespace WinFormsApp.Views.UserControls
         private Process? process;
         private WebController webController;
         private Button BtnUpdate;
-        private Thread th = null;
-        private CancellationTokenSource cts;
+        public Thread th = null;
+        public CancellationTokenSource cts;
+        private Animation animation;
+        public delegate void Animation(in CancellationToken token);
 
         public AddWebUC()
         {
@@ -32,19 +34,15 @@ namespace WinFormsApp.Views.UserControls
             Visible = false;
             tBxEnter.Text = tbxfill;
             BtnSave.Enabled = false;
-            //BtnClose.Enabled = false;
         }
 
-        public AddWebUC(ref PsiSet psiSet, ref WebController webController, in Button BtnUpdate
-            , ref CancellationTokenSource cts) : this() 
+        public AddWebUC(ref PsiSet psiSet, ref WebController webController, in Button BtnUpdate,
+            Animation animation) : this() 
         {
             this.psiSet = psiSet;
             this.webController = webController;
             this.BtnUpdate = BtnUpdate;
-            this.th = th;
-            this.cts = cts;
-
-            //BtnSave.DataBindings.Add(new Binding("Text", BtnUpdate, "Name"));
+            this.animation = animation;
         }
 
         private void tBxEnter_Enter(object sender, EventArgs e)
@@ -86,7 +84,8 @@ namespace WinFormsApp.Views.UserControls
                 webController.AddWebShortcutToDb(wst);
             }
             
-            WebUCNotEnanble();
+            WebUCNotEnanble(); 
+            startAnime();
         }
 
         private void BtnClose_MouseClick(object sender, MouseEventArgs e)
@@ -100,8 +99,8 @@ namespace WinFormsApp.Views.UserControls
             if (th == null || !th.IsAlive)
             {
                 cts = new CancellationTokenSource();
-                //th = new Thread(new ParameterizedThreadStart(_ => animePic3(cts.Token)));
-                //th.Start();
+                th = new Thread(new ParameterizedThreadStart(_ => animation(cts.Token)));
+                th.Start();
             }
         }
 
@@ -109,7 +108,6 @@ namespace WinFormsApp.Views.UserControls
         {
             tBxEnter.Text = tbxfill;
             BtnSave.Enabled = false;
-            //BtnClose.Enabled = false;
             process = null;
             this.Visible = false;
         }
@@ -122,6 +120,5 @@ namespace WinFormsApp.Views.UserControls
                 BtnClose.Enabled = true;
             }
         }
-
     }
 }
